@@ -100,7 +100,7 @@ export const LEVELS = [
     crystals: [{ id: 'c4_1', x: 4, y: 1 }, { id: 'c4_2', x: 4, y: 3 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT],
-    parCards: 13
+    parCards: 14
   },
   {
     id: 5,
@@ -123,7 +123,7 @@ export const LEVELS = [
     crystals: [{ id: 'c5_1', x: 2, y: 3 }, { id: 'c5_2', x: 4, y: 1 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT],
-    parCards: 10
+    parCards: 11
   },
   {
     id: 6,
@@ -146,7 +146,7 @@ export const LEVELS = [
     crystals: [{ id: 'c6_1', x: 3, y: 1 }, { id: 'c6_2', x: 2, y: 3 }, { id: 'c6_3', x: 5, y: 2 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT],
-    parCards: 14
+    parCards: 18
   },
 
   // --- ZONA 2: TELUK RINTANGAN (Level 7–12) ---
@@ -319,10 +319,10 @@ export const LEVELS = [
     world: "Lembah Perulangan",
     concept: "Pola Berulang Multi-Arah",
     description: "Mendaki bukit berundak dengan pola gerak identik. Kenali pola berulangnya untuk menghemat kartu!",
-    hint: "Amati polanya: Byte melangkah [Maju 1, Belok Kanan, Maju 1, Belok Kiri]. Ulangi pola ini!",
+    hint: "Mulai melangkah ke kanan. Kombinasikan belokan kiri dan kanan untuk menaiki anak tangga menuju portal!",
     gridWidth: 8,
     gridHeight: 5,
-    startPos: { x: 1, y: 3, dir: D.UP },
+    startPos: { x: 1, y: 3, dir: D.RIGHT },
     finishPos: { x: 5, y: 1 },
     layout: [
       [2, 2, 2, 2, 2, 2, 2, 2],
@@ -334,7 +334,7 @@ export const LEVELS = [
     crystals: [{ id: 'c14_1', x: 2, y: 2 }, { id: 'c14_2', x: 4, y: 1 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT, C.LOOP],
-    parCards: 6
+    parCards: 10
   },
   {
     id: 15,
@@ -497,7 +497,7 @@ export const LEVELS = [
     crystals: [{ id: 'c21_1', x: 1, y: 2 }, { id: 'c21_2', x: 3, y: 1 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT, C.JUMP, C.IF_OBSTACLE],
-    parCards: 7
+    parCards: 9
   },
   {
     id: 22,
@@ -543,7 +543,7 @@ export const LEVELS = [
     crystals: [{ id: 'c23_1', x: 3, y: 1 }, { id: 'c23_2', x: 4, y: 2 }, { id: 'c23_3', x: 6, y: 2 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT, C.JUMP, C.IF_OBSTACLE],
-    parCards: 7
+    parCards: 8
   },
   {
     id: 24,
@@ -566,7 +566,7 @@ export const LEVELS = [
     crystals: [{ id: 'c24_1', x: 1, y: 2 }, { id: 'c24_2', x: 4, y: 1 }, { id: 'c24_3', x: 5, y: 1 }],
     switches: [],
     availableCards: [C.FORWARD, C.TURN_RIGHT, C.TURN_LEFT, C.JUMP, C.LOOP, C.IF_OBSTACLE],
-    parCards: 6
+    parCards: 8
   },
 
   // --- ZONA 5: KUIL MASTER ALGORITMA (Level 25–30) ---
