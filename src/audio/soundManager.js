@@ -4,6 +4,8 @@
  * Zero-dependency, zero-latency sound effects & tropical background ambient music.
  */
 
+import { safeStorage } from '../core/storage.js';
+
 class SoundManager {
   constructor() {
     this.ctx = null;
@@ -12,10 +14,10 @@ class SoundManager {
     this.musicTimer = null;
     this.musicStep = 0;
     
-    // Load preferences
-    const savedMute = localStorage.getItem('kodingbot_mute') || localStorage.getItem('robojalur_mute');
+    // Load preferences safely (supports sandboxed iframes)
+    const savedMute = safeStorage.getItem('kodingbot_mute') || safeStorage.getItem('robojalur_mute');
     if (savedMute !== null) this.isMuted = savedMute === 'true';
-    const savedMusic = localStorage.getItem('kodingbot_music_mute') || localStorage.getItem('robojalur_music_mute');
+    const savedMusic = safeStorage.getItem('kodingbot_music_mute') || safeStorage.getItem('robojalur_music_mute');
     if (savedMusic !== null) this.isMusicMuted = savedMusic === 'true';
   }
 
@@ -414,13 +416,13 @@ class SoundManager {
 
   toggleSound() {
     this.isMuted = !this.isMuted;
-    localStorage.setItem('kodingbot_mute', this.isMuted);
+    safeStorage.setItem('kodingbot_mute', this.isMuted);
     return !this.isMuted;
   }
 
   toggleMusic() {
     this.isMusicMuted = !this.isMusicMuted;
-    localStorage.setItem('kodingbot_music_mute', this.isMusicMuted);
+    safeStorage.setItem('kodingbot_music_mute', this.isMusicMuted);
     if (this.isMusicMuted) {
       this.stopMusic();
     } else {

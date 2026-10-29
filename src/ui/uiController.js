@@ -8,6 +8,7 @@ import { sounds } from '../audio/soundManager.js';
 import { state } from '../core/stateManager.js';
 import { LEVELS } from '../levels/levelData.js';
 import { assets } from '../core/assetManager.js';
+import { safeStorage } from '../core/storage.js';
 
 export class UIController {
   constructor(game) {
@@ -449,7 +450,7 @@ export class UIController {
       });
 
       if (confirmed) {
-        localStorage.clear();
+        safeStorage.clear();
         sounds.playTrash();
         await this.showGameAlert({
           title: "Progres Berhasil Direset",

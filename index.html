@@ -6,6 +6,37 @@
   <title>KodingBot: Petualangan Pulau Algoritma — Game Edukasi Koding SD</title>
   <meta name="description" content="Game edukasi berpikir komputasional dan koding dasar untuk siswa SD/MI melalui petualangan robot Byte di Pulau Algoritma.">
   
+  <!-- Defensive storage fallback for sandboxed iframe embeds (e.g. galerimedia, LMS) -->
+  <script>
+    (function() {
+      try {
+        var test = window.localStorage;
+        if (test) {
+          test.setItem('__kb_probe__', '1');
+          test.removeItem('__kb_probe__');
+        }
+      } catch (e) {
+        var createMockStorage = function() {
+          var store = {};
+          return {
+            getItem: function(k) { return Object.prototype.hasOwnProperty.call(store, k) ? store[k] : null; },
+            setItem: function(k, v) { store[k] = String(v); },
+            removeItem: function(k) { delete store[k]; },
+            clear: function() { store = {}; },
+            key: function(i) { return Object.keys(store)[i] || null; },
+            get length() { return Object.keys(store).length; }
+          };
+        };
+        try {
+          Object.defineProperty(window, 'localStorage', { value: createMockStorage(), configurable: true, writable: true });
+        } catch (err) {}
+        try {
+          Object.defineProperty(window, 'sessionStorage', { value: createMockStorage(), configurable: true, writable: true });
+        } catch (err) {}
+      }
+    })();
+  </script>
+  
   <!-- Modern Child-Friendly Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

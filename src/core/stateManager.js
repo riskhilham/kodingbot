@@ -3,6 +3,8 @@
  * Central State Manager & Progression Store
  */
 
+import { safeStorage } from './storage.js';
+
 class StateManager {
   constructor() {
     this.currentScreen = 'splash'; // 'splash', 'menu', 'level_select', 'game', 'how_to', 'about'
@@ -18,7 +20,7 @@ class StateManager {
 
   loadProgress() {
     try {
-      const saved = localStorage.getItem('kodingbot_progress') || localStorage.getItem('robojalur_progress');
+      const saved = safeStorage.getItem('kodingbot_progress') || safeStorage.getItem('robojalur_progress');
       if (saved) {
         const data = JSON.parse(saved);
         this.levelStars = data.levelStars || {};
@@ -27,7 +29,7 @@ class StateManager {
         this.unlockedLevels = 30;
       }
     } catch (e) {
-      console.warn('Could not load progress from localStorage', e);
+      console.warn('Could not load progress from safeStorage', e);
     }
   }
 
@@ -38,9 +40,9 @@ class StateManager {
         levelStars: this.levelStars,
         totalCrystals: this.totalCrystals
       };
-      localStorage.setItem('kodingbot_progress', JSON.stringify(data));
+      safeStorage.setItem('kodingbot_progress', JSON.stringify(data));
     } catch (e) {
-      console.warn('Could not save progress to localStorage', e);
+      console.warn('Could not save progress to safeStorage', e);
     }
   }
 
@@ -59,8 +61,8 @@ class StateManager {
     this.unlockedLevels = 30;
     this.levelStars = {};
     this.totalCrystals = 0;
-    localStorage.removeItem('kodingbot_progress');
-    localStorage.removeItem('robojalur_progress');
+    safeStorage.removeItem('kodingbot_progress');
+    safeStorage.removeItem('robojalur_progress');
   }
 
   isLevelUnlocked(levelIdx) {
