@@ -1,0 +1,150 @@
+{
+  "project": "RoboJalur: Ekspedisi Pulau Algoritma",
+  "version": "1.0.0",
+  "art_style": "Premium Cartoon 2D",
+  "assets": [
+    {
+      "id": "cover_landscape",
+      "filename": "game-cover-landscape.jpg",
+      "type": "branding_cover",
+      "category": "marketing",
+      "description": "Cover utama game rasio 16:9 menampilkan robot Byte berdiri di atas pulau tropis berteknologi dengan reruntuhan kuno, langit cerah, kristal energi melayang, dan jalur balok kode bercahaya.",
+      "resolution": "1792x1024",
+      "format": "jpg",
+      "destination": "assets/images/branding/game-cover-landscape.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "cover_square",
+      "filename": "game-cover-square.jpg",
+      "type": "branding_thumbnail",
+      "category": "marketing",
+      "description": "Thumbnail persegi 1:1 fokus pada robot Byte melambaikan tangan dengan latar kristal energi dan pulau tropis.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/branding/game-cover-square.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "menu_background",
+      "filename": "menu-background.jpg",
+      "type": "environment_background",
+      "category": "ui",
+      "description": "Latar belakang panorama pulau tropis dengan perpaduan teknologi purba ramah lingkungan untuk layar Menu Utama dan Splash Screen.",
+      "resolution": "1792x1024",
+      "format": "jpg",
+      "destination": "assets/images/backgrounds/menu-background.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "character_byte_hero",
+      "filename": "byte-hero.jpg",
+      "type": "character_art",
+      "category": "character",
+      "description": "Ilustrasi resolusi tinggi robot Byte dalam pose ramah menyapa dengan ransel panel surya untuk layar Menu Utama, Dialog, dan Panduan.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/characters/byte-hero.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_environment_sheet",
+      "filename": "island-tileset.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Tileset ubin grid petak pulau tropis: ubin batu kuno berukir sirkuit, ubin rumput, ubin air jernih, tombol saklar energi baterai, dan landasan finish.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/island-tileset.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "prop_energy_crystal",
+      "filename": "crystal-energy.jpg",
+      "type": "item_collectible",
+      "category": "gameplay",
+      "description": "Kristal energi prisma heksagonal emas berkilau untuk item koleksi penambah bintang.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/props/crystal-energy.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_grass_topdown",
+      "filename": "tile-grass-topdown.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Ubin tekstur padang rumput zamrud tropis tampak atas seamless (top-down 2D orthogonal) untuk latar grid arena ekspedisi.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/tile-grass-topdown.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_switch_plate",
+      "filename": "tile-switch-plate.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Ubin tombol saklar pijakan batu kuno berukir simbol baterai energi surya.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/tile-switch-plate.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "character_byte_sprite",
+      "filename": "byte-hero-sprite.jpg",
+      "type": "character_sprite",
+      "category": "gameplay",
+      "description": "Sprite karakter robot Byte ekspedisi pose chibi orthogonal untuk navigasi di atas grid permainan.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/characters/byte-hero-sprite.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_stone_seamless",
+      "filename": "tile-stone-seamless.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Tekstur ubin batu kuno berukir sirkuit cyan 100% seamless tanpa bingkai tepi untuk jalan petak terhubung.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/tile-stone-seamless.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_water_seamless",
+      "filename": "tile-water-seamless.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Tekstur air pirus tropis berombak kaustik 100% seamless tanpa sekat untuk aliran kanal sungai petualangan.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/tile-water-seamless.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_portal_circular",
+      "filename": "tile-portal-circular.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Platform portal finis piringan bundar teknologi purba dengan cincin runik holografik.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/tile-portal-circular.jpg",
+      "status": "ready"
+    },
+    {
+      "id": "tile_switch_circular",
+      "filename": "tile-switch-circular.jpg",
+      "type": "environment_tiles",
+      "category": "gameplay",
+      "description": "Ubin saklar pijak bundar batu runik berukir simbol baterai energi surya pendar aktif.",
+      "resolution": "1024x1024",
+      "format": "jpg",
+      "destination": "assets/images/tiles/tile-switch-circular.jpg",
+      "status": "ready"
+    }
+  ]
+}

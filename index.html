@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>KodingBot: Petualangan Pulau Algoritma — Game Edukasi Koding SD</title>
+  <meta name="description" content="Game edukasi berpikir komputasional dan koding dasar untuk siswa SD/MI melalui petualangan robot Byte di Pulau Algoritma.">
+  
+  <!-- Modern Child-Friendly Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <!-- App Container -->
+  <div id="game-app">
+
+    <!-- 1. SPLASH SCREEN (FULLSCREEN COVER & MINIMALIST BOTTOM DOCK) -->
+    <section id="screen-splash" class="screen-view active-screen">
+      <div class="splash-backdrop-fullscreen"></div>
+
+      <!-- Bottom Floating Dock (Loading Bar & Play Button Only) -->
+      <div class="splash-dock-container">
+        <!-- Progressive Loading Bar Box -->
+        <div id="splash-loading-box" class="splash-loading-box">
+          <div id="splash-status-text" class="splash-status-text">Memuat matriks Pulau Algoritma...</div>
+          <div class="splash-progress-track">
+            <div id="splash-progress-bar" class="splash-progress-fill" style="width: 0%;"></div>
+          </div>
+          <div id="splash-progress-percent" class="splash-progress-percent">0%</div>
+        </div>
+
+        <!-- Play Button (Revealed after loading completes) -->
+        <button id="btn-start-splash" class="btn-3d btn-emerald btn-large btn-play-reveal hidden" style="display: none;">
+          <span class="btn-icon">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+          </span>
+          MULAI PETUALANGAN
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. MAIN MENU SCREEN -->
+    <section id="screen-menu" class="screen-view hidden">
+      <div class="menu-overlay-panel">
+        <header class="menu-header">
+          <div class="institution-mini-tag">BBGTK Provinsi Jawa Tengah</div>
+          <h1 class="menu-title">KodingBot</h1>
+          <p class="menu-desc">Bantu robot Byte memecahkan teka-teki logika di pulau tropis!</p>
+        </header>
+
+        <div class="menu-body-layout">
+          <div class="menu-hero-visual">
+            <img src="assets/images/branding/game-cover-square.jpg" alt="Cover KodingBot" class="menu-cover-art">
+          </div>
+
+          <div class="menu-nav-buttons">
+            <button id="btn-menu-play" class="btn-3d btn-emerald btn-nav">
+              <span class="btn-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+              </span>
+              MULAI EKSPEDISI
+            </button>
+            <button id="btn-menu-levels" class="btn-3d btn-cyan btn-nav">
+              <span class="btn-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+              </span>
+              PILIH LEVEL
+            </button>
+            <button id="btn-menu-howto" class="btn-3d btn-amber btn-nav">
+              <span class="btn-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              </span>
+              PANDUAN BERMAIN
+            </button>
+            <button id="btn-menu-about" class="btn-3d btn-purple btn-nav">
+              <span class="btn-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              </span>
+              TENTANG & KREDIT
+            </button>
+          </div>
+        </div>
+
+        <footer class="menu-footer-controls">
+          <button id="btn-toggle-sound" class="btn-toggle-pill">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            Suara: Aktif
+          </button>
+          <button id="btn-toggle-music" class="btn-toggle-pill">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            Musik: Aktif
+          </button>
+        </footer>
+      </div>
+    </section>
+
+    <!-- 3. LEVEL SELECTION SCREEN -->
+    <section id="screen-level-select" class="screen-view hidden">
+      <div class="level-select-container">
+        <div class="screen-top-bar">
+          <button class="btn-3d btn-secondary btn-back-menu">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            KEMBALI KE MENU
+          </button>
+          <h2 class="section-title">Pilih Zona Ekspedisi</h2>
+          <div class="empty-spacer"></div>
+        </div>
+
+        <!-- Total Stars & Progress Bar -->
+        <div class="level-progress-banner">
+          <div class="progress-banner-left">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8" style="margin-right: 2px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span class="progress-title">Progres Ekspedisi:</span>
+            <strong id="level-select-stars-count">0 / 90 Bintang</strong>
+            <span class="free-mode-badge" title="Seluruh 30 level terbuka bebas untuk pembelajaran dan eksplorasi"><svg class="svg-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>Mode Bebas (30 Level Terbuka)</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="level-select-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Zone Navigation Filter Tabs -->
+        <div id="zone-filter-tabs" class="zone-filter-tabs">
+          <button class="zone-tab active" data-zone="all">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            Semua (30)
+          </button>
+          <button class="zone-tab" data-zone="0">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><circle cx="12" cy="7" r="4"></circle><path d="M3 20c3-2 6-2 9 0 3-2 6-2 9 0"></path></svg>
+            Zona 1 (1–6)
+          </button>
+          <button class="zone-tab" data-zone="1">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M2 12c3-2.5 6-2.5 9 0s6 2.5 9 0"></path><path d="M2 17c3-2.5 6-2.5 9 0s6 2.5 9 0"></path></svg>
+            Zona 2 (7–12)
+          </button>
+          <button class="zone-tab" data-zone="2">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            Zona 3 (13–18)
+          </button>
+          <button class="zone-tab" data-zone="3">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#F43F5E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
+            Zona 4 (19–24)
+          </button>
+          <button class="zone-tab" data-zone="4">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#8B5CF6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polygon points="12 2 2 7 22 7 12 2"></polygon><line x1="5" y1="7" x2="5" y2="18"></line><line x1="19" y1="7" x2="19" y2="18"></line><line x1="12" y1="7" x2="12" y2="18"></line><line x1="2" y1="21" x2="22" y2="21"></line></svg>
+            Zona 5 (25–30)
+          </button>
+        </div>
+
+        <div id="level-grid" class="level-card-grid">
+          <!-- Dynamically populated by UIController -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. GAMEPLAY SCREEN (CANVAS + COMMAND DECK) -->
+    <section id="screen-game" class="screen-view hidden">
+      <!-- Top HUD -->
+      <header class="game-hud">
+        <div class="hud-left">
+          <button class="btn-3d btn-secondary btn-small btn-back-menu" title="Kembali ke Menu">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span class="hud-back-text">MENU</span>
+          </button>
+          <div class="hud-level-nav-group">
+            <button id="btn-prev-level" class="btn-3d btn-secondary btn-icon-square btn-hud-nav" title="Pindah ke Level Sebelumnya (◀)">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div class="hud-level-info">
+              <span id="hud-level-title" class="hud-title-text">Level 1: Langkah Pertama Byte</span>
+              <span id="hud-level-concept" class="hud-concept-badge">Sequencing</span>
+            </div>
+            <button id="btn-next-level" class="btn-3d btn-secondary btn-icon-square btn-hud-nav" title="Pindah ke Level Berikutnya (▶)">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="hud-right">
+          <button id="btn-hud-speed" class="btn-3d btn-secondary btn-small" title="Ubah Kecepatan Gerak Robot (1x / 2x / 0.5x)">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="currentColor" stroke-width="1.5" style="margin-right: 4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <span id="hud-speed-label" class="hud-btn-label">1x</span>
+          </button>
+          <button id="btn-hud-sound-quick" class="btn-3d btn-secondary btn-small" title="Nyalakan / Matikan Suara Efek">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span id="hud-sound-label" class="hud-btn-label">Suara</span>
+          </button>
+          <button id="btn-hud-hint" class="btn-3d btn-amber btn-small" title="Lihat Petunjuk Strategi Level">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            <span class="hud-btn-label">Petunjuk</span>
+          </button>
+          <button id="btn-hud-fullscreen" class="btn-3d btn-secondary btn-icon-square" title="Mode Layar Penuh">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+          </button>
+          <div class="hud-stat-pill" title="Kristal energi yang terkumpul di level ini">
+            <span class="stat-icon">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="#38BDF8" stroke="#38BDF8" stroke-width="1.5"><polygon points="6 2 18 2 22 8 12 22 2 8 6 2"></polygon><line x1="2" y1="8" x2="22" y2="8"></line><line x1="12" y1="22" x2="7" y2="8"></line><line x1="12" y1="22" x2="17" y2="8"></line></svg>
+            </span>
+            <span id="hud-crystals">0 / 1</span>
+          </div>
+          <div class="hud-stat-pill" title="Batas jumlah kartu optimal untuk meraih 3 Bintang">
+            <span class="stat-icon">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </span>
+            <span class="hud-stat-label" style="font-size: 0.85rem; color: #94A3B8; margin-right: 4px;">Par:</span>
+            <span id="hud-par-score">5</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Game Workspace (3-Column Studio Layout) -->
+      <main class="game-workspace">
+        <!-- 1. Canvas Board (Game Viewport) -->
+        <div class="canvas-viewport">
+          <!-- Prompt Banner Matching Reference Image -->
+          <div class="board-prompt-banner">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="18" height="18" fill="#FACC15" stroke="#CA8A04" stroke-width="1.5" style="margin-right: 6px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            Agar robot sampai ke <span class="highlight-gift">Portal Finis</span>, urutan mana yang benar?
+          </div>
+
+          <canvas id="game-canvas"></canvas>
+          <div id="hud-status-message" class="status-bar info-text">
+            Susun kartu perintah untuk memandu robot Byte!
+          </div>
+        </div>
+
+        <!-- 2. Kotak Khusus Menata Langkah (Dedicated Full-Height Coding Workspace) -->
+        <section class="coding-workspace-panel">
+          <div class="workspace-panel-header">
+            <div class="workspace-title-box">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              <h4>Program Robot</h4>
+            </div>
+            <div class="workspace-header-actions">
+              <span class="card-count-badge">Kartu: <strong id="hud-card-count">0</strong></span>
+              <button id="btn-clear" class="btn-clear-trash" title="Hapus seluruh kartu perintah dari antrean">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 3px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                <span>Hapus</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Program Sequence Slots (Full Height Scrollable Container) -->
+          <div id="queue-container" class="queue-container">
+            <!-- Dynamically populated Scratch blocks or empty guide -->
+          </div>
+        </section>
+
+        <!-- 3. Panel Rak Perintah & Kontrol Eksekusi -->
+        <aside class="control-deck-panel">
+          <!-- Educational Focus Strip -->
+          <div class="educational-focus-strip" title="Fokus materi berpikir komputasional yang dilatih di level ini">
+            <div class="focus-strip-header">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="12" height="12" fill="#FACC15" stroke="#78350F" stroke-width="1.8" style="margin-right: 3px;">
+                <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 6h8c1.5-1.5 3-3.5 3-6a7 7 0 0 0-7-7z"></path>
+              </svg>
+              <span>Fokus Berpikir:</span>
+            </div>
+            <div class="focus-pills-row">
+              <span class="focus-pill"><span class="focus-pill-icon"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#F472B6" stroke-width="2.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><circle cx="3.5" cy="6" r="1.5" fill="#F472B6"></circle><circle cx="3.5" cy="12" r="1.5" fill="#F472B6"></circle><circle cx="3.5" cy="18" r="1.5" fill="#F472B6"></circle></svg></span> Urutan</span>
+              <span class="focus-pill"><span class="focus-pill-icon"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="12" r="3"></circle><path d="M6 9v6"></path><path d="M9 6h3a3 3 0 0 1 3 3v3"></path></svg></span> Logika</span>
+              <span class="focus-pill"><span class="focus-pill-icon"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#FBBF24" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3"></circle><line x1="12" y1="1" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="23"></line><line x1="1" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="23" y2="12"></line></svg></span> Teliti</span>
+            </div>
+          </div>
+
+          <div class="deck-section-title">
+            <h3>Pilih Perintah</h3>
+          </div>
+
+          <!-- Command Palette (Source cards to click/drag) -->
+          <div id="palette-container" class="palette-container">
+            <!-- Dynamically populated (FORWARD, TURN_RIGHT, TURN_LEFT, JUMP, LOOP, IF_OBSTACLE) -->
+          </div>
+
+          <!-- Level Guide & Par Target Companion Card -->
+          <div class="deck-guide-card">
+            <div class="guide-card-header">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <span>PANDUAN KONTROL</span>
+            </div>
+            <div class="guide-card-tips">
+              <p>• Klik <strong>(+)</strong> untuk tambah langkah</p>
+              <p>• Tarik balok untuk atur urutan</p>
+            </div>
+            <div class="guide-card-par">
+              <span style="display: inline-flex; align-items: center; gap: 4px;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#F59E0B" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2" fill="#F59E0B"></circle></svg> Target Par:</span>
+              <strong id="deck-par-display">5 Kartu</strong>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="deck-action-buttons">
+            <button id="btn-run" class="btn-3d btn-emerald btn-run-large" title="Jalankan seluruh kartu perintah secara otomatis (Space / Enter)">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right: 5px;"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>
+              JALANKAN PROGRAM
+            </button>
+            <div class="deck-sub-action-row">
+              <button id="btn-step" class="btn-3d btn-cyan btn-step-action" title="Jalankan 1 langkah berikutnya untuk melacak pergerakan robot">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polygon points="5 3 19 12 5 21 5 3"></polygon><line x1="19" y1="3" x2="19" y2="21"></line></svg>
+                1 LANGKAH
+              </button>
+              <button id="btn-reset" class="btn-3d btn-amber btn-reset-action" title="Kembalikan robot ke posisi awal (R)">
+                <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                RESET
+              </button>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <!-- MODAL: VICTORY / LEVEL COMPLETE (FESTIVE CELEBRATION SCREEN) -->
+    <div id="modal-victory" class="modal-overlay hidden">
+      <div class="modal-card victory-card">
+        <!-- Confetti Particle Container -->
+        <div id="victory-confetti-container" class="confetti-container"></div>
+
+        <!-- Festive Celebration Trophy Header -->
+        <div class="victory-festive-header">
+          <div class="trophy-badge-icon">
+            <svg viewBox="0 0 24 24" width="42" height="42" fill="#FACC15" stroke="#CA8A04" stroke-width="1.8">
+              <path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2M6 3h12v7a6 6 0 0 1-12 0V3zM9 21h6M12 17v4"></path>
+            </svg>
+          </div>
+          <h2 class="victory-congrats">MISI BERHASIL!</h2>
+          <h3 id="victory-level-title" class="victory-subtitle">Level Selesai Diselesaikan</h3>
+        </div>
+
+        <!-- Byte Hero Congratulatory Speech -->
+        <div class="victory-byte-banner">
+          <img src="assets/images/characters/byte-hero.jpg" alt="Byte Happy" class="victory-byte-avatar">
+          <div class="victory-speech-bubble">
+            <p id="victory-byte-quote">Luar biasa! Algoritma langkah yang kamu rancang sukses memandu Byte!</p>
+          </div>
+        </div>
+
+        <!-- Dynamic Staggered 3 Stars -->
+        <div id="victory-stars-display" class="victory-stars-box">
+          <!-- Populated by UIController with popIn animations -->
+        </div>
+
+        <!-- Star Educational Breakdown Checklist -->
+        <div class="victory-checklist-card">
+          <div class="checklist-title">PENCAPAIAN TARGET BINTANG:</div>
+          <div id="star-check-row-1" class="star-check-row">
+            <div class="check-left">
+              <span class="check-star-icon">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <span class="check-label">Capai Stasiun Pendaratan Akhir</span>
+            </div>
+            <span class="check-badge status-pass">Tuntas <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          </div>
+          <div id="star-check-row-2" class="star-check-row">
+            <div class="check-left">
+              <span class="check-star-icon">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <span class="check-label">Kumpulkan Seluruh Kristal Energi</span>
+            </div>
+            <span id="star-check-crystals-badge" class="check-badge status-pass">1 / 1 <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          </div>
+          <div id="star-check-row-3" class="star-check-row">
+            <div class="check-left">
+              <span class="check-star-icon">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </span>
+              <span class="check-label">Efisiensi Kode (Target Par)</span>
+            </div>
+            <span id="star-check-par-badge" class="check-badge status-pass">6 Kartu <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          </div>
+          <div id="star-check-par-tip" class="star-par-tip hidden">
+            <!-- Dynamic coaching tip if Par Star 3 was missed -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="victory-modal-buttons">
+          <button id="btn-victory-replay" class="btn-3d btn-amber">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            Uji Coba Ulang
+          </button>
+          <button id="btn-victory-next" class="btn-3d btn-emerald btn-glow">
+            Level Berikutnya
+            <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 5px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: CARA BERMAIN -->
+    <div id="modal-how-to" class="modal-overlay hidden">
+      <div class="modal-card info-card">
+        <div class="modal-card-header">
+          <h2 style="display: flex; align-items: center; gap: 8px;">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Panduan Bermain KodingBot
+          </h2>
+          <button class="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-scroll-body">
+          <div class="guide-step">
+            <div class="guide-num-badge">1</div>
+            <div class="guide-text">
+              <h4>Kenali Posisi Robot & Sasaran</h4>
+              <p>Perhatikan arah hadap robot Byte pada ubin awal. Amati posisi <strong>Kristal Energi</strong> emas dan stasiun pendaratan akhir (ubin biru berlogo radar sasaran).</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-num-badge">2</div>
+            <div class="guide-text">
+              <h4>Rancang Rute dengan Kartu Perintah</h4>
+              <p>Klik kartu di rak sebelah kanan sesuai arah pergerakan yang direncanakan:</p>
+              <ul style="margin: 6px 0 0 18px; font-size: 0.85rem; color: #CBD5E1; line-height: 1.5;">
+                <li><strong>Maju:</strong> Melangkah 1 petak ke arah hadap robot saat ini.</li>
+                <li><strong>Putar Kanan / Kiri:</strong> Memutar orientasi robot 90 derajat di tempat.</li>
+                <li><strong>Lompat:</strong> Melompati 1 petak rintangan air/celah dan mendarat 2 petak di depan.</li>
+                <li><strong>Loop:</strong> Mengulang perintah secara otomatis agar susunan kartu lebih ringkas.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-num-badge">3</div>
+            <div class="guide-text">
+              <h4>Eksekusi & Perbaikan Logika (Debugging)</h4>
+              <p>Tekan tombol <strong>JALANKAN PROGRAM</strong> untuk melihat robot melangkah. Jika robot menabrak tebing batu atau salah belok, klik <strong>RESET / DEBUG RUTE</strong>, hapus kartu yang keliru, lalu susun kembali!</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-num-badge">4</div>
+            <div class="guide-text">
+              <h4>Strategi Bintang 3 (Efisiensi Kode)</h4>
+              <p>Raih <strong>Bintang 1</strong> dengan mencapai stasiun akhir, <strong>Bintang 2</strong> dengan mengumpulkan semua kristal, dan <strong>Bintang 3</strong> jika jumlah kartu yang kamu gunakan tidak melebihi <strong>Target Par</strong> level!</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn-3d btn-emerald btn-close-modal" style="margin-top: 16px;">SAYA MENGERTI PANDUAN INI</button>
+      </div>
+    </div>
+
+    <!-- MODAL: TENTANG & KREDIT PENGEMBANG -->
+    <div id="modal-about" class="modal-overlay hidden">
+      <div class="modal-card info-card">
+        <div class="modal-card-header">
+          <h2 style="display: flex; align-items: center; gap: 8px;">
+            <svg class="svg-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#C084FC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            Tentang Game & Kredit Pengembang
+          </h2>
+          <button class="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-scroll-body">
+          <div class="about-hero-box">
+            <img src="assets/images/branding/game-cover-landscape.jpg" alt="Cover" class="about-cover-img">
+            <h3>KodingBot: Petualangan Pulau Algoritma</h3>
+            <p class="about-sub">Versi 1.0.0 (Tahun 2026)</p>
+          </div>
+
+          <div class="about-section">
+            <h4>Pengembang Media</h4>
+            <p>
+              <strong style="color: #F8FAFC; font-size: 1.05rem;">Riskhi Ilham Hidayat</strong><br>
+              <span style="color: #94A3B8;">Pengembang Teknologi Pembelajaran</span><br>
+              <span style="color: #38BDF8; font-weight: 700;">Balai Besar Guru dan Tenaga Kependidikan (BBGTK) Provinsi Jawa Tengah</span>
+            </p>
+          </div>
+
+          <div class="about-section">
+            <h4>Tujuan Pembelajaran</h4>
+            <p>Mengembangkan fondasi Berpikir Komputasional (<em>Computational Thinking</em>) peserta didik SD/MI Fase B & C, meliputi pemecahan masalah bertahap (<em>sequencing</em>), pengenalan pola perulangan (<em>looping</em>), serta keterampilan reflektif perbaikan kesalahan (<em>debugging</em>).</p>
+          </div>
+
+          <div class="about-section">
+            <h4>Spesifikasi Perangkat</h4>
+            <p>HTML5 Canvas Engine murni, Web Audio API Synthesizer terintegrasi tanpa latensi, serta antarmuka taktil yang mendukung laboratorium komputer desktop maupun tablet sentuh.</p>
+          </div>
+
+          <div class="about-section teacher-section" style="border: 1px dashed rgba(244, 63, 94, 0.4); border-radius: 8px; padding: 10px; background: rgba(244, 63, 94, 0.05); margin-top: 12px;">
+            <h4 style="color: #FDA4AF; display: flex; align-items: center; gap: 6px;">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#F43F5E" stroke-width="2.2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              Pengaturan Guru / Lab Komputer
+            </h4>
+            <p style="font-size: 0.8rem; color: #94A3B8; margin: 4px 0 10px 0;">Reset seluruh bintang & progres level tersimpan di perangkat ini sebelum digunakan oleh rombel/sesi kelas baru.</p>
+            <button id="btn-reset-all-progress" class="btn-3d btn-rose" style="font-size: 0.78rem; padding: 6px 14px; width: 100%;">
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" style="margin-right: 4px;"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              Hapus / Reset Seluruh Bintang
+            </button>
+          </div>
+        </div>
+        <button class="btn-3d btn-purple btn-close-modal" style="margin-top: 16px;">TUTUP INFORMASI</button>
+      </div>
+    </div>
+
+    <!-- MODAL: LEVEL INTRO BRIEFING (BYTE GREETING) -->
+    <div id="modal-level-intro" class="modal-overlay hidden">
+      <div class="modal-card intro-card">
+        <div class="intro-header">
+          <div class="intro-avatar-box">
+            <img src="assets/images/characters/byte-hero.jpg" alt="Byte" class="intro-byte-img">
+          </div>
+          <div class="intro-title-group">
+            <div class="modal-badge-row">
+              <span id="intro-level-number-badge" class="modal-pill-badge pill-cyan">Level 1</span>
+              <span id="intro-level-zone-badge" class="modal-pill-badge pill-purple">Zona 1: Pantai Fondasi</span>
+            </div>
+            <h3 id="intro-level-title" class="intro-title">Langkah Pertama Byte</h3>
+            <div id="intro-level-concept-tag" class="modal-concept-tag">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+              <span id="intro-concept-text">Fokus: Urutan Langkah Logis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-speech-bubble">
+          <p id="intro-byte-speech">Halo Insinyur Cilik! Bantu aku menyusun balok perintah untuk mengumpulkan kristal energi dan mencapai stasiun akhir!</p>
+        </div>
+
+        <div class="intro-mission-box">
+          <h4 class="mission-checklist-title">TARGET MISI:</h4>
+          <ul class="mission-checklist">
+            <li>
+              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Capai Stasiun Pendaratan Akhir</span>
+            </li>
+            <li>
+              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#38BDF8" stroke-width="2.5"><polygon points="6 2 18 2 22 8 12 22 2 8 6 2"></polygon></svg>
+              <span id="intro-crystal-goal">Kumpulkan 1 Kristal Energi</span>
+            </li>
+            <li>
+              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FBBF24" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle></svg>
+              <span id="intro-par-goal">Maksimal 5 kartu perintah (Target Par)</span>
+            </li>
+          </ul>
+        </div>
+
+        <button id="btn-start-level" class="btn-3d btn-emerald btn-large" style="width: 100%; margin-top: 14px;">
+          SIAP, AYO KODING!
+        </button>
+      </div>
+    </div>
+
+    <!-- MODAL: LEVEL HINT (IN-GAME STRATEGY TIPS) -->
+    <div id="modal-level-hint" class="modal-overlay hidden">
+      <div class="modal-card info-card">
+        <div class="modal-card-header">
+          <div class="hint-header-info">
+            <div class="modal-badge-row">
+              <span id="hint-level-badge" class="modal-pill-badge pill-amber">Level 1</span>
+              <span id="hint-zone-badge" class="modal-pill-badge pill-purple">Zona 1: Pantai Fondasi</span>
+            </div>
+            <h2 style="display: flex; align-items: center; gap: 8px;">
+              <svg class="svg-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FBBF24" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              Petunjuk: <span id="hint-level-title">Langkah Pertama Byte</span>
+            </h2>
+          </div>
+          <button class="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-scroll-body">
+          <div class="hint-card-body">
+            <h4 id="hint-level-concept" style="color: #38BDF8; margin-bottom: 6px;">Konsep Pembelajaran</h4>
+            <p id="hint-level-text" style="color: #E2E8F0; line-height: 1.5; font-size: 0.95rem;">Petunjuk level akan muncul di sini.</p>
+          </div>
+        </div>
+        <button class="btn-3d btn-amber btn-close-modal" style="margin-top: 16px;">LANJUTKAN MISI</button>
+      </div>
+    </div>
+
+    <!-- MODAL: GAME DIALOG (CUSTOM IN-GAME CONFIRM & ALERT) -->
+    <div id="modal-game-dialog" class="modal-overlay hidden" style="z-index: 1000;">
+      <div class="modal-card dialog-card">
+        <div id="dialog-icon-container" class="dialog-icon-box">
+          <!-- Dynamic SVG Icon inserted via JS -->
+        </div>
+        <h3 id="dialog-title" class="dialog-title">Konfirmasi Aksi</h3>
+        <p id="dialog-message" class="dialog-message">Pesan konfirmasi permainan...</p>
+        <div id="dialog-actions" class="dialog-btn-group">
+          <button id="btn-dialog-cancel" class="btn-3d btn-secondary">Batal</button>
+          <button id="btn-dialog-confirm" class="btn-3d btn-rose">Lanjutkan</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main ES6 Entry Point -->
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
