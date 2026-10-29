@@ -179,24 +179,24 @@ KodingBot menggunakan modul standar **JavaScript ES6 (`import`/`export`)**, sehi
 
 ### Opsi 1: Menggunakan Laragon / XAMPP (Sangat Direkomendasikan di Sekolah)
 1. Letakkan folder `kodingbot` ke dalam direktori root server:
-   - Laragon: `C:\laragon\www\mpi\kodingbot`
+   - Laragon: `C:\laragon\www\kodingbot`
    - XAMPP: `C:\xampp\htdocs\kodingbot`
 2. Jalankan Apache dari panel kontrol Laragon / XAMPP.
 3. Buka peramban (Chrome / Edge / Firefox) dan kunjungi:
    ```
-   http://localhost/mpi/kodingbot/
+   http://localhost/kodingbot/
    ```
 
 ### Opsi 2: Menggunakan Ekstensi VS Code (Live Server)
 1. Buka folder proyek ini di **Visual Studio Code**.
 2. Pasang ekstensi **Live Server** (oleh Ritwick Dey).
-3. Klik kanan pada file [`index.html`](file:///c:/laragon/www/mpi/kodingbot/index.html) lalu pilih **"Open with Live Server"**.
+3. Klik kanan pada file [`index.html`](file:///c:/laragon/www/kodingbot/index.html) lalu pilih **"Open with Live Server"**.
 
 ### Opsi 3: Menggunakan Python Web Server (Terminal)
 Jika komputer sudah terpasang Python:
 ```bash
 # Masuk ke direktori proyek
-cd c:\laragon\www\mpi\kodingbot
+cd c:\laragon\www\kodingbot
 
 # Jalankan HTTP server bawaan Python
 python -m http.server 8080
