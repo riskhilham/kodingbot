@@ -19,10 +19,10 @@ export class AssetManager {
       { key: 'tilePath', src: 'assets/images/tiles/tile-stone-seamless.jpg', label: 'Ubin Jalan Kuno Runik Seamless' },
       { key: 'tileGrass', src: 'assets/images/tiles/tile-grass-topdown.jpg', label: 'Ubin Rumput Zamrud Top-Down' },
       { key: 'tileWater', src: 'assets/images/tiles/tile-water-seamless.jpg', label: 'Ubin Air Biru Pirus Seamless' },
-      { key: 'tileFinish', src: 'assets/images/tiles/tile-portal-circular.jpg', label: 'Platform Portal Finis Bundar', transparent: true },
-      { key: 'tileSwitch', src: 'assets/images/tiles/tile-switch-circular.jpg', label: 'Ubin Saklar Pijak Batu Bundar', transparent: true },
-      { key: 'propCrystal', src: 'assets/images/props/crystal-gem.jpg', label: 'Kristal Energi Faset', transparent: true },
-      { key: 'byteCharacter', src: 'assets/images/characters/byte-hero-sprite.jpg', label: 'Karakter Robot Byte Asli', transparent: true }
+      { key: 'tileFinish', src: 'assets/images/tiles/tile-portal-circular.png', label: 'Platform Portal Finis Bundar' },
+      { key: 'tileSwitch', src: 'assets/images/tiles/tile-switch-circular.png', label: 'Ubin Saklar Pijak Batu Bundar' },
+      { key: 'propCrystal', src: 'assets/images/props/crystal-gem.png', label: 'Kristal Energi Faset' },
+      { key: 'byteCharacter', src: 'assets/images/characters/byte-hero-sprite.png', label: 'Karakter Robot Byte Asli' }
     ];
   }
 
@@ -110,7 +110,7 @@ export class AssetManager {
       manifest.forEach((item) => {
         const img = new Image();
         img.onload = () => {
-          if (item.transparent) {
+          if (item.transparent && !item.src.endsWith('.png')) {
             this.images[item.key] = this.createTransparentSprite(img);
           } else {
             this.images[item.key] = img;

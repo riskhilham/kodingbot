@@ -84,6 +84,12 @@ export class UIController {
     this.dialogMessage = document.getElementById('dialog-message');
     this.btnDialogCancel = document.getElementById('btn-dialog-cancel');
     this.btnDialogConfirm = document.getElementById('btn-dialog-confirm');
+
+    // Smart Orientation Prompt
+    this.rotatePrompt = document.getElementById('rotate-device-prompt');
+    this.btnRotateFullscreen = document.getElementById('btn-rotate-fullscreen');
+    this.btnDismissRotate = document.getElementById('btn-dismiss-rotate');
+    this.portraitDismissed = false;
   }
 
   bindEvents() {
@@ -469,6 +475,51 @@ export class UIController {
         document.querySelectorAll('.sensor-selector-btn').forEach(b => b.classList.remove('open'));
       }
     });
+
+    // Smart Orientation Prompt Handlers
+    this.btnRotateFullscreen?.addEventListener('click', async () => {
+      sounds.playClick();
+      try {
+        const docEl = document.documentElement;
+        if (!document.fullscreenElement) {
+          if (docEl.requestFullscreen) await docEl.requestFullscreen();
+          else if (docEl.webkitRequestFullscreen) await docEl.webkitRequestFullscreen();
+        }
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock('landscape').catch(() => {});
+        }
+      } catch (e) {
+        console.warn('Orientation lock failed:', e);
+      }
+      this.rotatePrompt?.classList.add('hidden');
+    });
+
+    this.btnDismissRotate?.addEventListener('click', () => {
+      sounds.playClick();
+      this.portraitDismissed = true;
+      this.rotatePrompt?.classList.add('hidden');
+    });
+
+    window.addEventListener('resize', () => {
+      this.checkOrientationPrompt();
+    });
+
+    window.addEventListener('orientationchange', () => {
+      setTimeout(() => this.checkOrientationPrompt(), 200);
+    });
+  }
+
+  checkOrientationPrompt() {
+    if (!this.rotatePrompt) return;
+    const isMobile = window.innerWidth <= 768;
+    const isPortrait = window.innerHeight > window.innerWidth;
+    const needsLandscape = state.currentScreen === 'game' || state.currentScreen === 'level_select';
+
+    if (isMobile && isPortrait && needsLandscape && !this.portraitDismissed) {
+      this.rotatePrompt.classList.remove('hidden');
+    } else {
+      this.rotatePrompt.classList.add('hidden');
+    }
   }
 
   /**
@@ -621,6 +672,8 @@ export class UIController {
     else if (screenName === 'menu') this.screenMenu?.classList.remove('hidden');
     else if (screenName === 'level_select') this.screenLevelSelect?.classList.remove('hidden');
     else if (screenName === 'game') this.screenGame?.classList.remove('hidden');
+
+    this.checkOrientationPrompt();
   }
 
   renderLevelSelectGrid(selectedZone = null) {
