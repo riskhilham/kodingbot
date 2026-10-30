@@ -360,55 +360,58 @@
           <h3 id="victory-level-title" class="victory-subtitle">Level Selesai Diselesaikan</h3>
         </div>
 
-        <!-- Byte Hero Congratulatory Speech -->
-        <div class="victory-byte-banner">
-          <img src="assets/images/characters/byte-hero.jpg" alt="Byte Happy" class="victory-byte-avatar">
-          <div class="victory-speech-bubble">
-            <p id="victory-byte-quote">Luar biasa! Algoritma langkah yang kamu rancang sukses memandu Byte!</p>
+        <!-- Scrollable Middle Section -->
+        <div class="modal-scroll-body victory-scroll-body">
+          <!-- Byte Hero Congratulatory Speech -->
+          <div class="victory-byte-banner">
+            <img src="assets/images/characters/byte-hero.jpg" alt="Byte Happy" class="victory-byte-avatar">
+            <div class="victory-speech-bubble">
+              <p id="victory-byte-quote">Luar biasa! Algoritma langkah yang kamu rancang sukses memandu Byte!</p>
+            </div>
+          </div>
+
+          <!-- Dynamic Staggered 3 Stars -->
+          <div id="victory-stars-display" class="victory-stars-box">
+            <!-- Populated by UIController with popIn animations -->
+          </div>
+
+          <!-- Star Educational Breakdown Checklist -->
+          <div class="victory-checklist-card">
+            <div class="checklist-title">PENCAPAIAN TARGET BINTANG:</div>
+            <div id="star-check-row-1" class="star-check-row">
+              <div class="check-left">
+                <span class="check-star-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </span>
+                <span class="check-label">Capai Stasiun Pendaratan Akhir</span>
+              </div>
+              <span class="check-badge status-pass">Tuntas <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+            </div>
+            <div id="star-check-row-2" class="star-check-row">
+              <div class="check-left">
+                <span class="check-star-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </span>
+                <span class="check-label">Kumpulkan Seluruh Kristal Energi</span>
+              </div>
+              <span id="star-check-crystals-badge" class="check-badge status-pass">1 / 1 <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+            </div>
+            <div id="star-check-row-3" class="star-check-row">
+              <div class="check-left">
+                <span class="check-star-icon">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                </span>
+                <span class="check-label">Efisiensi Kode (Target Par)</span>
+              </div>
+              <span id="star-check-par-badge" class="check-badge status-pass">6 Kartu <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+            </div>
+            <div id="star-check-par-tip" class="star-par-tip hidden">
+              <!-- Dynamic coaching tip if Par Star 3 was missed -->
+            </div>
           </div>
         </div>
 
-        <!-- Dynamic Staggered 3 Stars -->
-        <div id="victory-stars-display" class="victory-stars-box">
-          <!-- Populated by UIController with popIn animations -->
-        </div>
-
-        <!-- Star Educational Breakdown Checklist -->
-        <div class="victory-checklist-card">
-          <div class="checklist-title">PENCAPAIAN TARGET BINTANG:</div>
-          <div id="star-check-row-1" class="star-check-row">
-            <div class="check-left">
-              <span class="check-star-icon">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              </span>
-              <span class="check-label">Capai Stasiun Pendaratan Akhir</span>
-            </div>
-            <span class="check-badge status-pass">Tuntas <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          </div>
-          <div id="star-check-row-2" class="star-check-row">
-            <div class="check-left">
-              <span class="check-star-icon">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              </span>
-              <span class="check-label">Kumpulkan Seluruh Kristal Energi</span>
-            </div>
-            <span id="star-check-crystals-badge" class="check-badge status-pass">1 / 1 <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          </div>
-          <div id="star-check-row-3" class="star-check-row">
-            <div class="check-left">
-              <span class="check-star-icon">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="#FACC15" stroke="#F59E0B" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              </span>
-              <span class="check-label">Efisiensi Kode (Target Par)</span>
-            </div>
-            <span id="star-check-par-badge" class="check-badge status-pass">6 Kartu <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-left: 2px;"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-          </div>
-          <div id="star-check-par-tip" class="star-par-tip hidden">
-            <!-- Dynamic coaching tip if Par Star 3 was missed -->
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
+        <!-- Action Buttons (Pinned Footer) -->
         <div class="victory-modal-buttons">
           <button id="btn-victory-replay" class="btn-3d btn-amber">
             <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
@@ -544,29 +547,31 @@
           </div>
         </div>
 
-        <div class="intro-speech-bubble">
-          <p id="intro-byte-speech">Halo Insinyur Cilik! Bantu aku menyusun balok perintah untuk mengumpulkan kristal energi dan mencapai stasiun akhir!</p>
+        <div class="modal-scroll-body intro-scroll-body">
+          <div class="intro-speech-bubble">
+            <p id="intro-byte-speech">Halo Insinyur Cilik! Bantu aku menyusun balok perintah untuk mengumpulkan kristal energi dan mencapai stasiun akhir!</p>
+          </div>
+
+          <div class="intro-mission-box">
+            <h4 class="mission-checklist-title">TARGET MISI:</h4>
+            <ul class="mission-checklist">
+              <li>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Capai Stasiun Pendaratan Akhir</span>
+              </li>
+              <li>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#38BDF8" stroke-width="2.5"><polygon points="6 2 18 2 22 8 12 22 2 8 6 2"></polygon></svg>
+                <span id="intro-crystal-goal">Kumpulkan 1 Kristal Energi</span>
+              </li>
+              <li>
+                <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FBBF24" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle></svg>
+                <span id="intro-par-goal">Maksimal 5 kartu perintah (Target Par)</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div class="intro-mission-box">
-          <h4 class="mission-checklist-title">TARGET MISI:</h4>
-          <ul class="mission-checklist">
-            <li>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10B981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Capai Stasiun Pendaratan Akhir</span>
-            </li>
-            <li>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#38BDF8" stroke-width="2.5"><polygon points="6 2 18 2 22 8 12 22 2 8 6 2"></polygon></svg>
-              <span id="intro-crystal-goal">Kumpulkan 1 Kristal Energi</span>
-            </li>
-            <li>
-              <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FBBF24" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle></svg>
-              <span id="intro-par-goal">Maksimal 5 kartu perintah (Target Par)</span>
-            </li>
-          </ul>
-        </div>
-
-        <button id="btn-start-level" class="btn-3d btn-emerald btn-large" style="width: 100%; margin-top: 14px;">
+        <button id="btn-start-level" class="btn-3d btn-emerald btn-large btn-intro-start">
           SIAP, AYO KODING!
         </button>
       </div>
@@ -594,7 +599,7 @@
             <p id="hint-level-text" style="color: #E2E8F0; line-height: 1.5; font-size: 0.95rem;">Petunjuk level akan muncul di sini.</p>
           </div>
         </div>
-        <button class="btn-3d btn-amber btn-close-modal" style="margin-top: 16px;">LANJUTKAN MISI</button>
+        <button class="btn-3d btn-amber btn-close-modal btn-hint-continue">LANJUTKAN MISI</button>
       </div>
     </div>
 

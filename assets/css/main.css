@@ -3080,7 +3080,7 @@ body {
   padding: 22px 26px;
   max-width: 520px;
   width: 92%;
-  max-height: 88vh;
+  max-height: min(88vh, 88dvh);
   overflow: hidden;
   /* Lock outer card: only modal-scroll-body scrolls */
   display: flex;
@@ -3207,15 +3207,16 @@ body {
 .victory-card {
   max-width: 520px;
   width: 92%;
-  max-height: 90vh;
-  overflow-y: auto;
+  max-height: min(90vh, 90dvh);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 1) 100%);
   border: 3px solid #F59E0B;
   border-radius: 24px;
-  padding: 24px 28px;
+  padding: 20px 24px;
   box-shadow: 0 0 60px rgba(245, 158, 11, 0.4), 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
-  overflow-x: hidden;
   text-align: center;
 }
 
@@ -3470,6 +3471,8 @@ body {
 .modal-scroll-body {
   flex: 1 1 auto;
   overflow-y: auto;
+  min-height: 0; /* Ensures flex container allows scroll area to shrink properly on small viewports */
+  overscroll-behavior: contain;
   max-height: none;
   display: flex;
   flex-direction: column;
@@ -3498,9 +3501,13 @@ body {
 .modal-card>button.btn-close-modal,
 .modal-card>.btn-primary,
 .modal-card>.btn-amber,
+.modal-card>.btn-intro-start,
+.modal-card>.btn-hint-continue,
+.modal-card>.victory-modal-buttons,
 .modal-card>.btn-3d:last-child {
   flex-shrink: 0;
   margin-top: 14px;
+  touch-action: manipulation;
 }
 
 .guide-step {
@@ -3560,6 +3567,190 @@ body {
   font-size: 0.9rem;
   color: #CBD5E1;
   line-height: 1.4;
+}
+
+/* ==========================================================================
+   LEVEL INTRO & HINT MODALS (BASE STYLES)
+   ========================================================================== */
+
+/* Distinctive Modal Identity Badges (Level & Zone Pills) */
+.modal-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+.modal-pill-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.modal-pill-badge.pill-cyan {
+  background: rgba(6, 182, 212, 0.22);
+  border: 1.5px solid #06B6D4;
+  color: #38BDF8;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.35);
+}
+
+.modal-pill-badge.pill-purple {
+  background: rgba(168, 85, 247, 0.22);
+  border: 1.5px solid #A855F7;
+  color: #C084FC;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
+}
+
+.modal-pill-badge.pill-amber {
+  background: rgba(245, 158, 11, 0.22);
+  border: 1.5px solid #F59E0B;
+  color: #FCD34D;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+}
+
+.modal-pill-badge.pill-emerald {
+  background: rgba(16, 185, 129, 0.22);
+  border: 1.5px solid #10B981;
+  color: #34D399;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+}
+
+.modal-concept-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94A3B8;
+  margin-top: 3px;
+}
+
+.hint-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hint-header-info h2 {
+  margin: 0;
+  font-size: 1.25rem !important;
+}
+
+.hint-card-body {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border: 1px solid #334155;
+}
+
+/* Level Intro Briefing Card */
+.intro-card {
+  max-width: 520px;
+  background: #1E293B;
+  border: 3px solid #10B981;
+  border-radius: 24px;
+  padding: 22px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+}
+
+.intro-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.intro-avatar-box {
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+  border-radius: 50%;
+  border: 3px solid #F59E0B;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
+}
+
+.intro-byte-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intro-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: #F8FAFC;
+  margin-top: 4px;
+}
+
+.intro-scroll-body {
+  gap: 12px;
+}
+
+.intro-speech-bubble {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1.5px solid #334155;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  color: #E2E8F0;
+  line-height: 1.4;
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.intro-speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 32px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #334155;
+}
+
+.intro-mission-box {
+  background: rgba(6, 78, 59, 0.28);
+  border: 1.5px solid #059669;
+  border-radius: 14px;
+  padding: 12px 16px;
+}
+
+.mission-checklist-title {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #34D399;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.mission-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mission-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  font-weight: 600;
+}
+
+.victory-scroll-body {
+  gap: 10px;
 }
 
 /* ==========================================================================
@@ -4019,28 +4210,225 @@ body {
     height: 42px;
   }
 
-  /* Modals on Mobile Portrait */
+  /* Modals on Mobile Portrait (Smartphone Tegak) */
   .modal-card {
-    padding: 16px 14px;
-    width: 95%;
-    max-height: 85vh;
+    padding: 14px 14px;
+    width: 94%;
+    max-width: 420px;
+    max-height: min(86vh, 86dvh);
+    border-radius: 20px;
   }
 
+  .modal-scroll-body {
+    gap: 10px;
+    padding-right: 4px;
+  }
+
+  .modal-card-header {
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  .modal-card-header h2 {
+    font-size: 1.15rem;
+  }
+
+  /* Level Intro Modal on Mobile Portrait */
+  .intro-card {
+    padding: 14px 14px;
+    max-width: 420px;
+  }
+
+  .intro-header {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .intro-avatar-box {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-width: 2px;
+  }
+
+  .intro-title {
+    font-size: 1.15rem;
+    margin-top: 2px;
+  }
+
+  .intro-speech-bubble {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    margin-bottom: 2px;
+    border-radius: 12px;
+  }
+
+  .intro-speech-bubble::before {
+    left: 24px;
+  }
+
+  .intro-mission-box {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .mission-checklist-title {
+    font-size: 0.72rem;
+    margin-bottom: 6px;
+  }
+
+  .mission-checklist {
+    gap: 6px;
+  }
+
+  .mission-checklist li {
+    font-size: 0.82rem;
+    gap: 6px;
+  }
+
+  .btn-intro-start {
+    height: 42px !important;
+    font-size: 0.88rem !important;
+    padding: 8px 14px !important;
+    margin-top: 10px !important;
+  }
+
+  /* Level Hint Modal on Mobile Portrait */
+  .hint-header-info h2 {
+    font-size: 1.05rem !important;
+  }
+
+  .hint-card-body {
+    padding: 10px 12px;
+  }
+
+  .hint-card-body h4 {
+    font-size: 0.82rem;
+  }
+
+  #hint-level-text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .btn-hint-continue {
+    height: 40px !important;
+    font-size: 0.85rem !important;
+    padding: 8px 14px !important;
+    margin-top: 10px !important;
+  }
+
+  /* Victory Celebration Modal on Mobile Portrait */
   .victory-card {
-    padding: 16px 14px;
+    padding: 12px 14px;
+    max-width: 420px;
   }
 
-  .victory-festive-header h2 {
-    font-size: 1.5rem;
+  .victory-festive-header {
+    margin-bottom: 2px;
   }
 
-  .victory-modal-buttons {
-    flex-direction: column;
+  .trophy-badge-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .victory-congrats {
+    font-size: 1.35rem;
+    margin-bottom: 0;
+  }
+
+  .victory-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .victory-byte-banner {
+    padding: 6px 10px;
+    margin: 4px 0 6px 0;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .victory-byte-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .victory-speech-bubble p {
+    font-size: 0.78rem;
+    line-height: 1.3;
+  }
+
+  .victory-stars-box {
+    margin: 4px 0 6px 0;
     gap: 8px;
   }
 
+  .star-wrapper svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .victory-checklist-card {
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    gap: 4px;
+  }
+
+  .checklist-title {
+    font-size: 0.7rem;
+  }
+
+  .star-check-row {
+    padding: 5px 8px;
+    font-size: 0.76rem;
+  }
+
+  .star-par-tip {
+    font-size: 0.72rem;
+    padding: 5px 8px;
+  }
+
+  .victory-modal-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
   .victory-modal-buttons button {
-    width: 100%;
+    flex: 1;
+    height: 40px !important;
+    font-size: 0.8rem !important;
+    padding: 6px 8px !important;
+    margin-top: 0 !important;
+  }
+
+  /* In-Game Dialog Modal on Mobile Portrait */
+  .dialog-card {
+    max-width: 340px;
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+
+  .dialog-icon-box {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 8px;
+  }
+
+  .dialog-title {
+    font-size: 1.15rem;
+  }
+
+  .dialog-message {
+    font-size: 0.82rem;
+  }
+
+  .dialog-btn-group button {
+    height: 38px;
+    font-size: 0.8rem;
   }
 }
 
@@ -4239,9 +4627,245 @@ body {
     white-space: nowrap;
   }
 
+  /* Modals on Mobile Landscape (Smartphone Layar Miring) */
   .modal-card {
-    max-height: 90vh;
-    padding: 12px 16px;
+    max-height: min(92vh, 92dvh);
+    max-width: 490px;
+    padding: 10px 14px;
+    border-radius: 16px;
+  }
+
+  .modal-scroll-body {
+    gap: 6px;
+    padding-right: 4px;
+  }
+
+  .modal-card-header {
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+  }
+
+  .modal-card-header h2 {
+    font-size: 0.98rem;
+  }
+
+  .modal-badge-row {
+    margin-bottom: 2px;
+    gap: 4px;
+  }
+
+  .modal-pill-badge {
+    font-size: 0.62rem;
+    padding: 2px 7px;
+  }
+
+  .modal-concept-tag {
+    font-size: 0.7rem;
+    margin-top: 1px;
+  }
+
+  /* Level Intro Modal on Mobile Landscape */
+  .intro-card {
+    padding: 10px 14px;
+    max-width: 480px;
+  }
+
+  .intro-header {
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .intro-avatar-box {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-width: 2px;
+  }
+
+  .intro-title {
+    font-size: 1.02rem;
+    margin-top: 1px;
+  }
+
+  .intro-speech-bubble {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    line-height: 1.25;
+    margin-bottom: 2px;
+    border-radius: 10px;
+  }
+
+  .intro-speech-bubble::before {
+    left: 18px;
+    top: -6px;
+    border-width: 0 6px 6px 6px;
+  }
+
+  .intro-mission-box {
+    padding: 6px 10px;
+    border-radius: 10px;
+  }
+
+  .mission-checklist-title {
+    font-size: 0.68rem;
+    margin-bottom: 4px;
+  }
+
+  .mission-checklist {
+    gap: 3px;
+  }
+
+  .mission-checklist li {
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+
+  .btn-intro-start {
+    height: 34px !important;
+    font-size: 0.8rem !important;
+    padding: 4px 12px !important;
+    margin-top: 6px !important;
+  }
+
+  /* Level Hint Modal on Mobile Landscape */
+  .hint-header-info h2 {
+    font-size: 0.95rem !important;
+  }
+
+  .hint-card-body {
+    padding: 6px 10px;
+  }
+
+  .hint-card-body h4 {
+    font-size: 0.76rem;
+    margin-bottom: 3px;
+  }
+
+  #hint-level-text {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .btn-hint-continue {
+    height: 34px !important;
+    font-size: 0.8rem !important;
+    padding: 4px 12px !important;
+    margin-top: 6px !important;
+  }
+
+  /* Victory Celebration Modal on Mobile Landscape */
+  .victory-card {
+    padding: 8px 14px;
+    max-width: 480px;
+  }
+
+  .victory-festive-header {
+    margin-bottom: 2px;
+  }
+
+  .trophy-badge-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .victory-congrats {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  .victory-subtitle {
+    font-size: 0.76rem;
+  }
+
+  .victory-byte-banner {
+    padding: 4px 8px;
+    margin: 2px 0 4px 0;
+    gap: 6px;
+    border-radius: 8px;
+  }
+
+  .victory-byte-avatar {
+    width: 26px;
+    height: 26px;
+  }
+
+  .victory-speech-bubble p {
+    font-size: 0.74rem;
+    line-height: 1.2;
+  }
+
+  .victory-stars-box {
+    margin: 2px 0 4px 0;
+    gap: 6px;
+  }
+
+  .star-wrapper svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .victory-checklist-card {
+    padding: 5px 8px;
+    margin-bottom: 2px;
+    gap: 3px;
+  }
+
+  .checklist-title {
+    font-size: 0.65rem;
+    margin-bottom: 0;
+  }
+
+  .star-check-row {
+    padding: 3px 6px;
+    font-size: 0.7rem;
+  }
+
+  .star-par-tip {
+    font-size: 0.68rem;
+    padding: 3px 6px;
+  }
+
+  .victory-modal-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .victory-modal-buttons button {
+    flex: 1;
+    height: 34px !important;
+    font-size: 0.75rem !important;
+    padding: 4px 6px !important;
+    margin-top: 0 !important;
+  }
+
+  /* In-Game Dialog Modal on Mobile Landscape */
+  .dialog-card {
+    max-width: 320px;
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+
+  .dialog-icon-box {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 4px;
+  }
+
+  .dialog-title {
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+  }
+
+  .dialog-message {
+    font-size: 0.76rem;
+    margin-bottom: 8px;
+  }
+
+  .dialog-btn-group button {
+    height: 32px;
+    font-size: 0.75rem;
   }
 
   .menu-overlay-panel {
@@ -4274,178 +4898,28 @@ body {
     min-width: 78px;
     font-size: 0.68rem;
   }
-}
 
-/* ==========================================================================
-   LEVEL INTRO & HINT MODALS
-   ========================================================================== */
+  .modal-card {
+    width: 96%;
+    padding: 10px 10px;
+    max-height: min(88vh, 88dvh);
+  }
 
-/* Distinctive Modal Identity Badges (Level & Zone Pills) */
-.modal-badge-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 5px;
-}
+  .intro-title {
+    font-size: 1.05rem;
+  }
 
-.modal-pill-badge {
-  font-size: 0.7rem;
-  font-weight: 800;
-  padding: 3px 10px;
-  border-radius: 999px;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-  white-space: nowrap;
-}
+  .intro-speech-bubble {
+    font-size: 0.8rem;
+    padding: 8px 10px;
+  }
 
-.modal-pill-badge.pill-cyan {
-  background: rgba(6, 182, 212, 0.22);
-  border: 1.5px solid #06B6D4;
-  color: #38BDF8;
-  box-shadow: 0 0 10px rgba(6, 182, 212, 0.35);
-}
+  .victory-congrats {
+    font-size: 1.25rem;
+  }
 
-.modal-pill-badge.pill-purple {
-  background: rgba(168, 85, 247, 0.22);
-  border: 1.5px solid #A855F7;
-  color: #C084FC;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.35);
-}
-
-.modal-pill-badge.pill-amber {
-  background: rgba(245, 158, 11, 0.22);
-  border: 1.5px solid #F59E0B;
-  color: #FCD34D;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
-}
-
-.modal-pill-badge.pill-emerald {
-  background: rgba(16, 185, 129, 0.22);
-  border: 1.5px solid #10B981;
-  color: #34D399;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
-}
-
-.modal-concept-tag {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #94A3B8;
-  margin-top: 3px;
-}
-
-.hint-header-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.hint-header-info h2 {
-  margin: 0;
-  font-size: 1.25rem !important;
-}
-
-.intro-card {
-  max-width: 520px;
-  background: #1E293B;
-  border: 3px solid #10B981;
-  border-radius: 24px;
-  padding: 26px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-}
-
-.intro-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.intro-avatar-box {
-  width: 72px;
-  height: 72px;
-  min-width: 72px;
-  border-radius: 50%;
-  border: 3px solid #F59E0B;
-  overflow: hidden;
-  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
-}
-
-.intro-byte-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.intro-title {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  color: #F8FAFC;
-  margin-top: 4px;
-}
-
-.intro-speech-bubble {
-  background: rgba(15, 23, 42, 0.75);
-  border: 1.5px solid #334155;
-  border-radius: 14px;
-  padding: 14px 18px;
-  font-size: 0.95rem;
-  color: #E2E8F0;
-  line-height: 1.45;
-  position: relative;
-  margin-bottom: 16px;
-}
-
-.intro-speech-bubble::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: 36px;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid #334155;
-}
-
-.intro-mission-box {
-  background: rgba(6, 78, 59, 0.28);
-  border: 1.5px solid #059669;
-  border-radius: 14px;
-  padding: 14px 18px;
-}
-
-.mission-checklist-title {
-  font-family: var(--font-ui);
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #34D399;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-}
-
-.mission-checklist {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.mission-checklist li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #CBD5E1;
-  font-weight: 600;
-}
-
-.hint-card-body {
-  background: rgba(15, 23, 42, 0.6);
-  border-radius: 12px;
-  padding: 16px 20px;
-  border: 1px solid #334155;
+  .victory-modal-buttons button {
+    font-size: 0.74rem !important;
+    padding: 4px 6px !important;
+  }
 }
